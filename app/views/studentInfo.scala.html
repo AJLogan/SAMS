@@ -1,0 +1,36 @@
+@(students: List[Student], addStudentForm: Form[Student])
+
+@import helper._
+
+@main("Student") {
+    
+    <h1>@students.size() Student(s)</h1>
+    
+    <ul>
+        @for(student <- students) {
+            <li>
+                @student.studentId
+                @student.studentForename
+                @student.studentSurname
+                
+                @form(routes.StudentController.deleteStudent(student.id)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+        
+    </ul>
+    
+    <h2>Add a new student</h2>
+    
+    @form(routes.StudentController.newStudent()) {
+    
+        @inputText(addStudentForm("Student Number"))
+        @inputText(addStudentForm("Forename"))
+        @inputText(addStudentForm("Surname"))
+        
+        <input type="submit" value="Create">
+        
+    }
+    
+}

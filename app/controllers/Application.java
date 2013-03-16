@@ -13,7 +13,7 @@ public class Application extends Controller {
 //        return ok(index.render("Your new application is ready."));
 //        return ok("Hello World");
 //        This is a redirect to the tasks list page
-        return redirect(routes.Application.tasks());
+        return redirect(routes.StudentController.students());
     }
     
   public static Result tasks() {
