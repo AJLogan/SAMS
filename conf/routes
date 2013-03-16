@@ -11,9 +11,24 @@ POST    /tasks                      controllers.Application.newTask()
 POST    /tasks/:id/delete           controllers.Application.deleteTask(id: Long)
 
 # Students
-GET     /students                      controllers.StudentController.students()
-POST    /students                      controllers.StudentController.newStudent()
-POST    /students/:id/delete           controllers.StudentController.deleteStudent(id: Long)
+GET     /students                   controllers.StudentController.students()
+POST    /students                   controllers.StudentController.newStudent()
+POST    /students/:id/delete        controllers.StudentController.deleteStudent(id: Long)
+
+# Modules
+GET     /modules                    controllers.ModuleController.modules()
+POST    /modules                    controllers.ModuleController.newModule()
+POST    /modules/:id/delete         controllers.ModuleController.deleteModule(id: Long)
+
+# Staff
+GET     /staff                      controllers.StaffController.staff()
+POST    /staff                      controllers.StaffController.newStaff()
+POST    /staff/:id/delete           controllers.StaffController.deleteStaff(id: Long)
+
+# Courses
+GET     /course                     controllers.CourseController.courses()
+POST    /course                     controllers.CourseController.newCourse()
+POST    /course:id/delete           controllers.CourseController.deleteCourse(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

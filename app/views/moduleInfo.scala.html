@@ -1,0 +1,36 @@
+@(modules: List[Module], addModuleForm: Form[Module])
+
+@import helper._
+
+@main("Module") {
+    
+    <h1>@modules.size() Module(s)</h1>
+    
+    <ul>
+        @for(module <- modules) {
+            <li>
+                @module.crn
+                @module.moduleCode
+                @module.moduleName
+                
+                @form(routes.ModuleController.deleteModule(module.id)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+        
+    </ul>
+    
+    <h2>Add a new module</h2>
+    
+    @form(routes.ModuleController.newModule()) {
+    
+        @inputText(addModuleForm("CRN"))
+        @inputText(addModuleForm("Module Code"))
+        @inputText(addModuleForm("Module Name"))
+        
+        <input type="submit" value="Create">
+        
+    }
+    
+}

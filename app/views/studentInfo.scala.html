@@ -9,9 +9,12 @@
     <ul>
         @for(student <- students) {
             <li>
-                @student.studentId
-                @student.studentForename
-                @student.studentSurname
+                @student.title
+                @student.forename
+                @student.surname
+                @student.gender
+                @student.postcode
+                @student.international
                 
                 @form(routes.StudentController.deleteStudent(student.id)) {
                     <input type="submit" value="Delete">
@@ -25,9 +28,12 @@
     
     @form(routes.StudentController.newStudent()) {
     
-        @inputText(addStudentForm("Student Number"))
+        @inputText(addStudentForm("Title"))
         @inputText(addStudentForm("Forename"))
         @inputText(addStudentForm("Surname"))
+        @inputText(addStudentForm("Gender"))
+        @inputText(addStudentForm("Postcode"))
+        @inputText(addStudentForm("International?"))
         
         <input type="submit" value="Create">
         

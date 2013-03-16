@@ -1,0 +1,42 @@
+@(staff: List[Staff], addStaffForm: Form[Staff])
+
+@import helper._
+
+@main("Staff") {
+    
+    <h1>@staff.size() Staff Member(s)</h1>
+    
+    <ul>
+        @for(staff <- staff) {
+            <li>
+                @staff.title
+                @staff.forename
+                @staff.surname
+                @staff.office
+                @staff.email
+                @staff.phone
+                
+                @form(routes.StaffController.deleteStaff(staff.id)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+        
+    </ul>
+    
+    <h2>Add a new Staff Member</h2>
+    
+    @form(routes.StaffController.newStaff()) {
+    
+        @inputText(addStaffForm("Title"))
+        @inputText(addStaffForm("Forename"))
+        @inputText(addStaffForm("Surname"))
+        @inputText(addStaffForm("Office"))
+        @inputText(addStaffForm("E-Mail"))
+        @inputText(addStaffForm("Phone?"))
+        
+        <input type="submit" value="Create">
+        
+    }
+    
+}

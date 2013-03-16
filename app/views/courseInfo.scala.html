@@ -1,0 +1,40 @@
+@(courses: List[Course], addCourseForm: Form[Course])
+
+@import helper._
+
+@main("Course") {
+    
+    <h1>@courses.size() Course(s)</h1>
+    
+    <ul>
+        @for(course <- courses) {
+            <li>
+                @course.courseid
+                @course.startYear
+                @course.courseName
+                @course.duration
+                @course.modeStudy
+                
+                @form(routes.CourseController.deleteCourse(course.id)) {
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+        
+    </ul>
+    
+    <h2>Add a new course</h2>
+    
+    @form(routes.CourseController.newCourse()) {
+    
+        @inputText(addCourseForm("Course ID"))
+        @inputText(addCourseForm("Start Year"))
+        @inputText(addCourseForm("Course Name"))
+        @inputText(addCourseForm("Duration"))
+        @inputText(addCourseForm("Mode of Study"))
+        
+        <input type="submit" value="Create">
+        
+    }
+    
+}
