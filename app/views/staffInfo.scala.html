@@ -1,6 +1,7 @@
 @(staff: List[Staff], addStaffForm: Form[Staff])
 
 @import helper._
+@import helper.twitterBootstrap._
 
 @main("Staff") {
     
@@ -9,15 +10,16 @@
     <ul>
         @for(staff <- staff) {
             <li>
+                @staff.staffId
                 @staff.title
                 @staff.forename
                 @staff.surname
-                @staff.office
                 @staff.email
+                @staff.office
                 @staff.phone
                 
                 @form(routes.StaffController.deleteStaff(staff.id)) {
-                    <input type="submit" value="Delete">
+                    <input type="submit" class="btn secondary" value="Delete">
                 }
             </li>
         }
@@ -27,15 +29,30 @@
     <h2>Add a new Staff Member</h2>
     
     @form(routes.StaffController.newStaff()) {
-    
-        @inputText(addStaffForm("Title"))
-        @inputText(addStaffForm("Forename"))
-        @inputText(addStaffForm("Surname"))
-        @inputText(addStaffForm("Office"))
-        @inputText(addStaffForm("E-Mail"))
-        @inputText(addStaffForm("Phone?"))
+        @helper.inputText(addStaffForm("staffId"),
+            '_label -> "Staff Number"
+        )
+        @helper.select(addStaffForm("title"), 
+              options = options(Titles.list),
+              '_label -> "Title"
+        )
+        @helper.inputText(addStaffForm("forename"),
+            '_label -> "Forename"
+        )
+        @helper.inputText(addStaffForm("surname"),
+            '_label -> "Surname"
+        )
+        @helper.inputText(addStaffForm("email"),
+            '_label -> "Email Address"
+        )
+        @helper.inputText(addStaffForm("office"),
+            '_label -> "Office"
+        )
+        @helper.inputText(addStaffForm("phone"),
+            '_label -> "Phone Number"
+        )
         
-        <input type="submit" value="Create">
+        <input type="submit" class="btn secondary" value="Create">
         
     }
     

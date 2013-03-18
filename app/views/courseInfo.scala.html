@@ -1,6 +1,7 @@
 @(courses: List[Course], addCourseForm: Form[Course])
 
 @import helper._
+@import helper.twitterBootstrap._
 
 @main("Course") {
     
@@ -9,14 +10,14 @@
     <ul>
         @for(course <- courses) {
             <li>
-                @course.courseid
+                @course.courseId
                 @course.startYear
-                @course.courseName
+                @course.name
                 @course.duration
                 @course.modeStudy
                 
                 @form(routes.CourseController.deleteCourse(course.id)) {
-                    <input type="submit" value="Delete">
+                    <input type="submit" class="btn secondary" value="Delete">
                 }
             </li>
         }
@@ -26,15 +27,26 @@
     <h2>Add a new course</h2>
     
     @form(routes.CourseController.newCourse()) {
-    
-        @inputText(addCourseForm("Course ID"))
-        @inputText(addCourseForm("Start Year"))
-        @inputText(addCourseForm("Course Name"))
-        @inputText(addCourseForm("Duration"))
-        @inputText(addCourseForm("Mode of Study"))
+        @helper.inputText(addCourseForm("courseid"),
+            '_label -> "Course Code"
+        )
+        @helper.inputText(addCourseForm("startYear"),
+            '_label -> "Start Year"
+        )
+        @helper.inputText(addCourseForm("name"),
+            '_label -> "Course Title"
+        )
+        @helper.inputText(addCourseForm("duration"),
+            '_label -> "Course Duration"
+        )
+        @helper.select(addCourseForm("modeStudy"), 
+              options = options(ModeStudy.list),
+              '_label -> "Mode of Study",
+              '_default -> "--- Pick a Mode of Study ---"
+              
+        )
         
-        <input type="submit" value="Create">
-        
+        <input type="submit" class="btn secondary" value="Create">
     }
     
 }

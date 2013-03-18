@@ -1,6 +1,7 @@
 @(modules: List[Module], addModuleForm: Form[Module])
 
 @import helper._
+@import helper.twitterBootstrap._
 
 @main("Module") {
     
@@ -14,7 +15,7 @@
                 @module.moduleName
                 
                 @form(routes.ModuleController.deleteModule(module.id)) {
-                    <input type="submit" value="Delete">
+                    <input type="submit" class="btn secondary" value="Delete">
                 }
             </li>
         }
@@ -24,12 +25,22 @@
     <h2>Add a new module</h2>
     
     @form(routes.ModuleController.newModule()) {
-    
-        @inputText(addModuleForm("CRN"))
-        @inputText(addModuleForm("Module Code"))
-        @inputText(addModuleForm("Module Name"))
+        @helper.inputText(addModuleForm("crn"),
+            '_label -> "Module CRN"
+        )
+        @helper.inputText(addModuleForm("moduleCode"),
+            '_label -> "Module Code"
+        )
+        @helper.inputText(addModuleForm("moduleName"),
+            '_label -> "Module Name"
+        )
+        @helper.select(addModuleForm("gender"), 
+              options = options(Genders.list),
+              '_label -> "Lecturer",
+              '_default -> "--- Pick a Lecturer ---"
+        )
         
-        <input type="submit" value="Create">
+        <input type="submit" class="btn secondary" value="Create">
         
     }
     

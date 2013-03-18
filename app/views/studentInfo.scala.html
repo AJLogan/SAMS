@@ -36,8 +36,9 @@
         @helper.inputText(addStudentForm("studentId"),
             '_label -> "Student Number"
         )
-        @helper.inputText(addStudentForm("title"),
-            '_label -> "Title"
+        @helper.select(addStudentForm("title"), 
+              options = options(Titles.list),
+              '_label -> "Title"
         )
         @helper.inputText(addStudentForm("forename"),
             '_label -> "Forename"
@@ -46,8 +47,7 @@
             '_label -> "Surname"
         )
         @helper.inputText(addStudentForm("email"),
-            '_label -> "Email",
-            '_help -> "Enter a valid email address."
+            '_label -> "Email Address"
         )
         @helper.select(addStudentForm("gender"), 
               options = options(Genders.list),
@@ -67,6 +67,12 @@
         )
         @helper.checkbox(addStudentForm("international"),
             '_label -> "International Student"
+        )
+        @helper.select(addStudentForm("course"), 
+              options = options(Genders.list),
+              '_label -> "Course",
+              '_default -> "--- Pick a course ---"
+              
         )
         
         <input type="submit" class="btn secondary" value="Create">   

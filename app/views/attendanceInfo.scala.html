@@ -1,0 +1,33 @@
+@(attendances: List[Attendance], addAttendanceForm: Form[Attendance])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Attendance") {
+    
+    <h1>@attendances.size() Attendance(s)</h1>
+    
+    <ul>
+        @for(attendance <- attendances) {
+            <li>
+                @attendance.attendance
+                
+                @form(routes.AttendanceController.deleteAttendance(attendance.id)) {
+                    <input type="submit" class="btn secondary" value="Delete">
+                }
+            </li>
+        }
+        
+    </ul>
+    
+    <h2>Add a new attendance</h2>
+    
+    @form(routes.AttendanceController.newAttendance()) {
+        @helper.checkbox(addAttendanceForm("attendance"),
+            '_label -> "Present"
+        )
+        <input type="submit" class="btn secondary" value="Create">
+        
+    }
+    
+}

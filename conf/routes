@@ -30,5 +30,15 @@ GET     /course                     controllers.CourseController.courses()
 POST    /course                     controllers.CourseController.newCourse()
 POST    /course:id/delete           controllers.CourseController.deleteCourse(id: Long)
 
+# Slots
+GET     /slot                       controllers.SlotController.slots()
+POST     /slot                      controllers.SlotController.newSlot()
+POST     /slot:id/delete            controllers.SlotController.deleteSlot(id: Long)
+
+# Attendances
+GET     /attendance                  controllers.AttendanceController.attendances()
+POST    /attendance                  controllers.AttendanceController.newAttendance()
+POST    /attendance:id/delete        controllers.AttendanceController.deleteAttendance(id: Long)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

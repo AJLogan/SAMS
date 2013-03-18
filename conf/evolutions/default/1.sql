@@ -3,11 +3,17 @@
 
 # --- !Ups
 
+create table attendance (
+  id                        bigint auto_increment not null,
+  attendance                tinyint(1) default 0,
+  constraint pk_attendance primary key (id))
+;
+
 create table course (
   id                        bigint auto_increment not null,
-  courseid                  varchar(255),
+  course_id                 varchar(255),
   start_year                varchar(255),
-  course_name               varchar(255),
+  name                      varchar(255),
   duration                  varchar(255),
   mode_study                varchar(255),
   constraint pk_course primary key (id))
@@ -21,8 +27,22 @@ create table module (
   constraint pk_module primary key (id))
 ;
 
+create table slot (
+  id                        bigint auto_increment not null,
+  slot_id                   varchar(255),
+  room_id                   varchar(255),
+  year                      varchar(255),
+  semester                  integer,
+  week                      integer,
+  day                       integer,
+  start_time                integer,
+  duration                  integer,
+  constraint pk_slot primary key (id))
+;
+
 create table staff (
   id                        bigint auto_increment not null,
+  staff_id                  varchar(255),
   title                     varchar(255),
   forename                  varchar(255),
   surname                   varchar(255),
@@ -61,9 +81,13 @@ create table task (
 
 SET FOREIGN_KEY_CHECKS=0;
 
+drop table attendance;
+
 drop table course;
 
 drop table module;
+
+drop table slot;
 
 drop table staff;
 

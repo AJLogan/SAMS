@@ -16,9 +16,9 @@ public class Course extends Model{
   @Id  
   public Long id;
   
-  public String courseid;
+  public String courseId;
   public String startYear;
-  public String courseName;
+  public String name;
   public String duration;
   public String modeStudy;
   

@@ -11,11 +11,15 @@ public class Staff extends Model{
   @Id  
   public Long id;
   
+  public String staffId;
   public String title;
   public String forename;
   public String surname;
   public String office;
+  
+  @Email
   public String email;
+  
   public String phone;
   
   
