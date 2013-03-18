@@ -34,10 +34,15 @@ create table staff (
 
 create table student (
   id                        bigint auto_increment not null,
+  student_id                varchar(255),
   title                     varchar(255),
   forename                  varchar(255),
   surname                   varchar(255),
+  email                     varchar(255),
   gender                    varchar(255),
+  address_line1             varchar(255),
+  address_line2             varchar(255),
+  address_line3             varchar(255),
   postcode                  varchar(255),
   international             tinyint(1) default 0,
   constraint pk_student primary key (id))

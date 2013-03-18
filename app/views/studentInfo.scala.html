@@ -1,6 +1,7 @@
 @(students: List[Student], addStudentForm: Form[Student])
 
 @import helper._
+@import helper.twitterBootstrap._
 
 @main("Student") {
     
@@ -9,15 +10,20 @@
     <ul>
         @for(student <- students) {
             <li>
+                @student.studentId
                 @student.title
                 @student.forename
                 @student.surname
+                @student.email
                 @student.gender
+                @student.addressLine1
+                @student.addressLine2
+                @student.addressLine3
                 @student.postcode
                 @student.international
                 
                 @form(routes.StudentController.deleteStudent(student.id)) {
-                    <input type="submit" value="Delete">
+                    <input type="submit" class="btn secondary" value="Delete">
                 }
             </li>
         }
@@ -25,18 +31,44 @@
     </ul>
     
     <h2>Add a new student</h2>
-    
+
     @form(routes.StudentController.newStudent()) {
-    
-        @inputText(addStudentForm("Title"))
-        @inputText(addStudentForm("Forename"))
-        @inputText(addStudentForm("Surname"))
-        @inputText(addStudentForm("Gender"))
-        @inputText(addStudentForm("Postcode"))
-        @inputText(addStudentForm("International?"))
+        @helper.inputText(addStudentForm("studentId"),
+            '_label -> "Student Number"
+        )
+        @helper.inputText(addStudentForm("title"),
+            '_label -> "Title"
+        )
+        @helper.inputText(addStudentForm("forename"),
+            '_label -> "Forename"
+        )
+        @helper.inputText(addStudentForm("surname"),
+            '_label -> "Surname"
+        )
+        @helper.inputText(addStudentForm("email"),
+            '_label -> "Email",
+            '_help -> "Enter a valid email address."
+        )
+        @helper.select(addStudentForm("gender"), 
+              options = options(Genders.list),
+              '_label -> "Gender"
+        )
+        @helper.inputText(addStudentForm("addressLine1"),
+            '_label -> "Address Line 1"
+        )
+        @helper.inputText(addStudentForm("addressLine2"),
+            '_label -> "Address Line 2"
+        )
+        @helper.inputText(addStudentForm("addressLine3"),
+            '_label -> "Town"
+        )
+        @helper.inputText(addStudentForm("postcode"),
+            '_label -> "Postcode"
+        )
+        @helper.checkbox(addStudentForm("international"),
+            '_label -> "International Student"
+        )
         
-        <input type="submit" value="Create">
-        
-    }
-    
+        <input type="submit" class="btn secondary" value="Create">   
+    }   
 }

@@ -5,11 +5,26 @@
 <html>
     <head>
         <title>@title</title>
+        <!--Bootstrap css-->
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+        <!--Bootstrap Js--> 
+        <script src="@routes.Assets.at("javascripts/bootstrap.min.js")" type="text/javascript"></script>
+        
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
     </head>
     <body>
-        @content
+        <div class="containter">
+            <image src="/assets/images/uu_logo.jpeg" align="right" height="100px" width="150px">
+                <h3 class="muted">Student Attendance Management System</h3>
+                    <h1>Forms So Far...</h1>
+                        <a class="btn btn-large btn-success" href="/students">Students</a>
+                        <a class="btn btn-large btn-success" href="/modules">Modules</a>
+                        <a class="btn btn-large btn-success" href="/course">Courses</a>
+                        <a class="btn btn-large btn-success" href="/staff">Staff</a>
+                </div>
+            @content
+        </div>
     </body>
 </html>

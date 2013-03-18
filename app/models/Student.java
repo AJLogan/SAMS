@@ -11,13 +11,23 @@ public class Student extends Model{
   @Id  
   public Long id;
   
+  public String studentId;
+  
   public String title;
   public String forename;
   public String surname;
-  public String gender;
-  public String postcode;
-  public boolean international;
   
+  @Email
+  public String email;
+  
+  public String gender;
+  
+  public String addressLine1;
+  public String addressLine2;
+  public String addressLine3;
+  public String postcode;
+  
+  public boolean international;
           
   public static Model.Finder<Long, Student> find = new Model.Finder(
           Long.class, Student.class);
