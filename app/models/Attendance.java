@@ -14,6 +14,12 @@ public class Attendance extends Model{
   
   public boolean attendance;
   
+  @ManyToOne
+  public Slot slot;
+  
+  @ManyToOne 
+  public Student student;
+  
   public static Model.Finder<Long, Attendance> find = new Model.Finder(
           Long.class, Attendance.class);
   

@@ -10,7 +10,7 @@
     <ul>
         @for(staff <- staff) {
             <li>
-                @staff.staffId
+                @staff.staffNum
                 @staff.title
                 @staff.forename
                 @staff.surname
@@ -29,7 +29,7 @@
     <h2>Add a new Staff Member</h2>
     
     @form(routes.StaffController.newStaff()) {
-        @helper.inputText(addStaffForm("staffId"),
+        @helper.inputText(addStaffForm("staffNum"),
             '_label -> "Staff Number"
         )
         @helper.select(addStaffForm("title"), 

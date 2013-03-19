@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.List;
 import play.*;
 import models.*;
 import play.data.Form;
@@ -40,6 +42,20 @@ public static Result staff() {
 //    return TODO;
       Staff.delete(id);
       return redirect(routes.StaffController.staff());
+  }
+  
+  //Get Lecturers for Drop Down
+  public static List<String> getLecturerNames() {
+//      List<Staff> lecturers = Staff.find.all();
+//      System.out.println(lecturers);
+//      return lecturers;      
+   
+        List<String> all = new ArrayList<String>();
+        List<Staff> lecturers = Staff.find.all();
+        
+        all.add(lecturers.get(0).toString());
+        return all;
+    
   }
   
 //  FORMS

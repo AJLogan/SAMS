@@ -11,7 +11,7 @@ public class Staff extends Model{
   @Id  
   public Long id;
   
-  public String staffId;
+  public String staffNum;
   public String title;
   public String forename;
   public String surname;
@@ -22,7 +22,8 @@ public class Staff extends Model{
   
   public String phone;
   
-  
+  @OneToMany
+  public Module module;
           
   public static Model.Finder<Long, Staff> find = new Model.Finder(
           Long.class, Staff.class);
@@ -38,5 +39,4 @@ public class Staff extends Model{
   public static void delete(Long id) {
       find.ref(id).delete();
   }
-    
 }

@@ -8,8 +8,6 @@ import play.db.ebean.*;
 
 @Entity
 public class Module extends Model{
-   @ManyToMany
-  public Course course;
     
   @Id  
   public Long id;
@@ -18,6 +16,13 @@ public class Module extends Model{
   public String moduleCode;
   public String moduleName;
   
+  @ManyToMany(cascade=CascadeType.ALL)
+    public Set<Course> courseModule = new HashSet<Course>();  
+  
+  
+  @ManyToOne
+  public Staff staff;
+  
   public static Model.Finder<Long, Module> find = new Model.Finder(
           Long.class, Module.class);
   
@@ -25,12 +30,11 @@ public class Module extends Model{
     return find.all();
   }
   
-  public static void create(Module student) {
-      student.save();
+  public static void create(Module module) {
+      module.save();
   }
   
   public static void delete(Long id) {
       find.ref(id).delete();
   }
-    
 }

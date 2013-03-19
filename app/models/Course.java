@@ -9,9 +9,6 @@ import play.db.ebean.*;
 
 @Entity
 public class Course extends Model{
-    
-  @ManyToMany
-  public Module module;
   
   @Id  
   public Long id;
@@ -22,7 +19,9 @@ public class Course extends Model{
   public String duration;
   public String modeStudy;
   
-          
+  @ManyToMany(mappedBy="courseModule")
+  public Set<Module> courseModule = new HashSet<Module>();
+  
   public static Model.Finder<Long, Course> find = new Model.Finder(
           Long.class, Course.class);
  

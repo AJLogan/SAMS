@@ -21,7 +21,10 @@ public class Slot extends Model{
   public int day;
   public int startTime;
   public int duration;
-          
+  
+  @ManyToOne
+  public Module module;
+  
   public static Model.Finder<Long, Slot> find = new Model.Finder(
           Long.class, Slot.class);
  

@@ -28,6 +28,9 @@ public class Student extends Model{
   public String postcode;
   
   public boolean international;
+  
+  @ManyToOne
+  public Course course;
           
   public static Model.Finder<Long, Student> find = new Model.Finder(
           Long.class, Student.class);

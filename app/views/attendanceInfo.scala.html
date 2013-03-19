@@ -23,11 +23,20 @@
     <h2>Add a new attendance</h2>
     
     @form(routes.AttendanceController.newAttendance()) {
+        @helper.select(addAttendanceForm("student"), 
+              options = options(Genders.list),
+              '_label -> "Student",
+              '_default -> "--- Pick a Student ---"
+        )
+        @helper.select(addAttendanceForm("course"), 
+              options = options(Genders.list),
+              '_label -> "Course",
+              '_default -> "--- Pick a course ---"
+        )
         @helper.checkbox(addAttendanceForm("attendance"),
             '_label -> "Present"
         )
         <input type="submit" class="btn secondary" value="Create">
         
-    }
-    
+    }   
 }

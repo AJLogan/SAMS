@@ -35,7 +35,7 @@
             '_label -> "Module Name"
         )
         @helper.select(addModuleForm("gender"), 
-              options = options(Genders.list),
+              options = options(StaffController.getLecturerNames),
               '_label -> "Lecturer",
               '_default -> "--- Pick a Lecturer ---"
         )
