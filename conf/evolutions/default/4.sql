@@ -1,3 +1,3 @@
-insert into course(number, start_year, name, duration, mode_study) values ('2132','2012','BSc. Hons Computing Science','4','Full Time');
-insert into course(number, start_year, name, duration, mode_study) values ('2137','2012','BSc. Hons Information Communication Technologies','4','Full Time');
-insert into course(number, start_year, name, duration, mode_study) values ('2081','2012','Bsc. Hons Inter Multimedia Design','4','Part Time');
+-- insert into course(number, start_year, name, duration, mode_study) values ('2132','2012','BSc. Hons Computing Science','4','Full Time');
+-- insert into course(number, start_year, name, duration, mode_study) values ('2137','2012','BSc. Hons Information Communication Technologies','4','Full Time');
+-- insert into course(number, start_year, name, duration, mode_study) values ('2081','2012','Bsc. Hons Inter Multimedia Design','4','Part Time');
