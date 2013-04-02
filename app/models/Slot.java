@@ -32,7 +32,7 @@ public class Slot extends Model {
     @Constraints.Required
     public int week;    
     @Constraints.Required
-    public int day;    
+    public String day;    
     @Constraints.Required
     @Constraints.MaxLength(4)
     public String start_time;

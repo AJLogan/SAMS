@@ -4,7 +4,7 @@
 
 create table course (
   id                        bigint not null auto_increment,
-  course_id                 varchar(255) not null,
+  number                    varchar(255) not null,
   start_year                varchar(4) not null,
   name                      varchar(255) not null,
   duration                  integer not null,
@@ -15,7 +15,7 @@ create table course (
 
 create table student (
   id                        bigint not null auto_increment,
-  number                varchar(255) not null,
+  number                    varchar(255) not null,
   title                     varchar(255) not null,
   forename                  varchar(255) not null,
   surname                   varchar(255) not null,
@@ -33,7 +33,7 @@ create table student (
 
 create table staff (
   id                        bigint not null auto_increment,
-  number                  varchar(255) not null,
+  number                    varchar(255) not null,
   title                     varchar(255) not null,
   forename                  varchar(255) not null,
   surname                   varchar(255) not null,
@@ -46,8 +46,8 @@ create table staff (
 
 create table module (
   id                        bigint not null auto_increment,
-  crn                varchar(255) not null,
-  module_code               varchar(255) not null,
+  crn                       varchar(255) not null,
+  code                      varchar(255) not null,
   name                      varchar(255) not null,
   staff_id                  bigint,
   constraint pk_module primary key (id)
@@ -65,12 +65,12 @@ create table attendance (
 
 create table slot (
   id                        bigint not null auto_increment,
-  number                   varchar(255) not null,
-  room_id                   varchar(255) not null,
+  number                    varchar(255) not null,
+  room                   varchar(255) not null,
   year                      varchar(255) not null,
   semester                  int,
   week                      int,
-  day                       int,
+  day                       varchar(9),
   start_time                varchar(4),
   duration                  int,
   module_id                 bigint,

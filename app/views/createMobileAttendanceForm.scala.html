@@ -1,0 +1,92 @@
+@(attendanceForm: Form[Attendance])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h1>Add an attendance</h1>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwMgKrWFIq4b_G3-xJzUb9WLlUEHEA3FY&sensor=false"></script>
+    <script>
+        var map;
+        function initialize() {
+            var myOptions = {
+              zoom: 18,
+              panControl: false,
+                zoomControl: false,
+                zoomControlOptions: {
+                    style: google.maps.ZoomControlStyle.SMALL
+                  },
+                mapTypeControl: false,
+                scaleControl: false,
+                streetViewControl: false,
+                overviewMapControl: false,
+              center: new google.maps.LatLng(-34.397, 150.644),
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById('map'),
+                myOptions);
+                
+            // Try HTML5 geolocation
+            if(navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(function(position) {
+                var pos = new google.maps.LatLng(position.coords.latitude,
+                                                 position.coords.longitude);
+            
+                var infowindow = new google.maps.InfoWindow({
+                  map: map,
+                  position: pos,
+                  content: 'You are here'
+                });
+            
+                map.setCenter(pos);
+              }, function() {
+                handleNoGeolocation(true);
+              });
+            } else {
+              // Browser doesn't support Geolocation
+              handleNoGeolocation(false);
+            }
+        }
+        
+        function handleNoGeolocation(errorFlag) {
+        if (errorFlag) {
+          var content = 'Error: The Geolocation service failed.';
+        } else {
+          var content = 'Error: Your browser doesn\'t support geolocation.';
+        }
+        
+        var options = {
+          map: map,
+          position: new google.maps.LatLng(60, 105),
+          content: content
+        };
+        
+        var infowindow = new google.maps.InfoWindow(options);
+        map.setCenter(options.position);
+        }
+        
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+<div id="map" style="width:400px;height:400px;"></div>
+    @form(routes.attendanceController.save()) {
+        
+        <fieldset>        
+        @inputText(attendanceForm("slot.id"),
+            '_label -> "Class ID"
+        )    
+        @inputText(attendanceForm("student.id"),
+            '_label -> "Student Number"
+        )    
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Create this attendance" class="btn primary"> or 
+            <a href="@routes.attendanceController.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+}

@@ -77,7 +77,7 @@ public class attendanceController extends Controller {
             createAttendanceForm.render(attendanceForm)
         );
     }
-    
+
     /**
      * Handle the 'new attendance form' submission 
      */
@@ -88,6 +88,32 @@ public class attendanceController extends Controller {
         }
         attendanceForm.get().save();
         flash("success", "Attendance " + attendanceForm.get().id + " has been created");
+        return redirect(routes.attendanceController.list(0, "attendance_id", "asc", ""));
+    }
+
+
+     /**
+     * Display the 'new mobile attendance form'.
+     */
+    public static Result createMobile() {
+        Form<Attendance> attendanceForm = form(Attendance.class);
+        return ok(
+            createMobileAttendanceForm.render(attendanceForm)
+        );
+    }
+    
+    /**
+     * Handle the 'new mobile attendance form' submission 
+     */
+    public static Result saveMobile() {
+        Form<Attendance> attendanceForm = form(Attendance.class).bindFromRequest();
+        if(attendanceForm.hasErrors()) {
+            return badRequest(createAttendanceForm.render(attendanceForm));
+        }
+
+        Long number = attendanceForm.get().slot.id;
+        attendanceForm.get().save();
+        flash("success", "Attendance " + attendanceForm.get().id + number + " has been created");
         return redirect(routes.attendanceController.list(0, "attendance_id", "asc", ""));
     }
     

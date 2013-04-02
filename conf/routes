@@ -102,7 +102,7 @@ POST    /slots/:id/delete       controllers.slotController.delete(id:Long)
 # Attendance list (look at the default values for pagination parameters)
 GET     /attendances                  controllers.attendanceController.list(p:Int ?= 0, s ?= "id", o ?= "asc", f ?= "")
 
-# Add module
+# Add attendance
 GET     /attendances/new              controllers.attendanceController.create()
 POST    /attendances                  controllers.attendanceController.save()
 
@@ -112,6 +112,10 @@ POST    /attendances/:id              controllers.attendanceController.update(id
 
 # Delete an attendance
 POST    /attendances/:id/delete       controllers.attendanceController.delete(id:Long)
+
+#Mobile Registration
+GET     /mobile              controllers.attendanceController.createMobile()
+POST    /mobile                  controllers.attendanceController.save()
 
 ###############
 #Course_Module#
