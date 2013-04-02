@@ -1,0 +1,45 @@
+@(staffForm: Form[Staff])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h1>Add a Staff</h1>
+    
+    @form(routes.staffController.save()) {
+        
+        <fieldset>            
+        @inputText(staffForm("number"),
+            '_label -> "Staff ID"
+        )
+        @select(staffForm("title"), 
+              options = options(Titles.list),
+              '_label -> "Title"
+        )
+        @inputText(staffForm("forename"),
+            '_label -> "Forename"
+        )
+        @inputText(staffForm("surname"),
+            '_label -> "Surname"
+        )
+        @inputText(staffForm("office"),
+            '_label -> "Office"
+        )
+        @inputText(staffForm("email"),
+            '_label -> "Email"
+        )
+        @inputText(staffForm("phone"),
+            '_label -> "Phone number"
+        )
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Create this staff member" class="btn primary"> or 
+            <a href="@routes.staffController.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+}

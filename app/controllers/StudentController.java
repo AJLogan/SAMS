@@ -1,47 +1,103 @@
 package controllers;
 
-import play.*;
-import models.*;
-import play.data.Form;
+import java.util.*;
+
 import play.mvc.*;
+import play.data.*;
+import static play.data.Form.*;
+import play.*;
 
 import views.html.*;
 
+import models.*;
+
 /**
- *
- * @author andrew
+ * Manage students
  */
-public class StudentController extends Controller{
+public class studentController extends Controller {
+        
+    /**
+     * Handle default path requests, redirect to computers list
+     */
+    public static Result index() {
+        return redirect(routes.studentController.list(0, "number", "asc", ""));
+    }
+    /**
+     * Display the paginated list of students.
+     *
+     * @param page Current page number (starts from 0)
+     * @param sortBy Column to be sorted
+     * @param order Sort order (either asc or desc)
+     * @param filter Filter applied on student names
+     */
+    public static Result list(int page, String sortBy, String order, String filter) {
+        return ok(
+            listStudents.render(
+                Student.page(page, 10, sortBy, order, filter),
+                sortBy, order, filter
+            )
+        );
+    }
     
-public static Result students() {
-//    return TODO;
-//    TODO is a 501 Not Implemented response
-      return ok(
-              views.html.studentInfo.render(Student.all(), addStudentForm)
-              );
-  }
-  
-  public static Result newStudent() {
-//    return TODO;
-  Form<Student> filledForm = addStudentForm.bindFromRequest();
-  if(filledForm.hasErrors()) {
-      System.out.println(filledForm.errors().toString());
-      System.out.println("Errors Ahoy");
-    return badRequest(
-      views.html.studentInfo.render(Student.all(), filledForm)
-    );
-  } else {
-    Student.create(filledForm.get());
-    return redirect(routes.StudentController.students());  
-  }
-  }
-  
-  public static Result deleteStudent(Long id) {
-//    return TODO;
-      Student.delete(id);
-      return redirect(routes.StudentController.students());
-  }
-  
-//  FORMS
-  static Form<Student> addStudentForm = Form.form(Student.class);
+    /**
+     * Display the 'edit form' of a existing Student.
+     *
+     * @param id Id of the student to edit
+     */
+    public static Result edit(Long id) {
+        Form<Student> studentForm = form(Student.class).fill(
+            Student.find.byId(id)
+        );
+        return ok(
+            editStudentForm.render(id, studentForm)
+        );
+    }
+    
+    /**
+     * Handle the 'edit form' submission 
+     *
+     * @param id Id of the student to edit
+     */
+    public static Result update(Long id) {
+        Form<Student> studentForm = form(Student.class).bindFromRequest();
+        if(studentForm.hasErrors()) {
+            return badRequest(editStudentForm.render(id, studentForm));
+        }
+        studentForm.get().update(id);
+        flash("success", "Student " + studentForm.get().number + " has been updated");
+        return redirect(routes.studentController.list(0, "number", "asc", ""));
+    }
+    
+    /**
+     * Display the 'new student form'.
+     */
+    public static Result create() {
+        Form<Student> studentForm = form(Student.class);
+        return ok(
+            createStudentForm.render(studentForm)
+        );
+    }
+    
+    /**
+     * Handle the 'new student form' submission 
+     */
+    public static Result save() {
+        Form<Student> studentForm = form(Student.class).bindFromRequest();
+        if(studentForm.hasErrors()) {
+            return badRequest(createStudentForm.render(studentForm));
+        }
+        studentForm.get().save();
+        flash("success", "Student " + studentForm.get().forename + " " + studentForm.get().surname + " has been created");
+        return redirect(routes.studentController.list(0, "number", "asc", ""));
+    }
+    
+    /**
+     * Handle student deletion
+     */
+    public static Result delete(Long id) {
+        Student.find.ref(id).delete();
+        flash("success", "Student has been deleted");
+        return redirect(routes.studentController.list(0, "number", "asc", ""));
+    }
 }
+            

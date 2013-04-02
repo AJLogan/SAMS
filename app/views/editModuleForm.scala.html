@@ -1,0 +1,41 @@
+@(id: Long, moduleForm: Form[Module])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h1>Edit module</h1>
+    
+    @form(routes.moduleController.update(id)) {
+        
+        <fieldset>
+        @inputText(moduleForm("crn"),
+            '_label -> "Module CRN"
+        )
+        @inputText(moduleForm("code"),
+            '_label -> "Module Code"
+        )
+        @inputText(moduleForm("name"),
+            '_label -> "Module Name"
+        )
+        @select(moduleForm("staff.id"), 
+              options = options(Staff.options),
+              '_label -> "Lecturer in charge",
+              '_default -> "--- Pick a Lecturer ---"
+        )            
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Save this module" class="btn primary"> or 
+            <a href="@routes.moduleController.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+    @form(routes.moduleController.delete(id), 'class -> "topRight") {
+        <input type="submit" value="Delete this module" class="btn danger">
+    }
+    
+}

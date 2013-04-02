@@ -1,0 +1,15 @@
+# Messages for numer of rows in tables
+
+students.list.title={0,choice,0#No students|1#One student|1<{0,number,integer} students} found
+
+modules.list.title={0,choice,0#No modules|1#One module|1<{0,number,integer} modules} found
+
+courses.list.title={0,choice,0#No courses|1#One course|1<{0,number,integer} courses} found
+
+staff.list.title={0,choice,0#No staff members|1#One staff member|1<{0,number,integer} staff members} found
+
+slots.list.title={0,choice,0#No slots|1#One slot|1<{0,number,integer} slots} found
+
+attendances.list.title={0,choice,0#No attendance records|1#One attendance record|1<{0,number,integer} attendance records} found
+
+courseModules.list.title={0,choice,0#No Course Module links|1#One Course Module link|1<{0,number,integer} Course Module links} found

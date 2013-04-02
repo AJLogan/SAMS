@@ -1,0 +1,35 @@
+@(courseModuleForm: Form[CourseModule])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h1>Add an Course Module link</h1>
+    
+    @form(routes.courseModuleController.save()) {
+        
+        <fieldset>            
+        @select(courseModuleForm("course.id"), 
+            options(Course.options), 
+            '_label -> "Course", 
+            '_default -> "-- Choose a course --",
+            '_showConstraints -> false
+        )
+        @select(courseModuleForm("module.id"), 
+            options(Module.options), 
+            '_label -> "Module", 
+            '_default -> "-- Choose a module --",
+            '_showConstraints -> false
+        )
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Create this course link" class="btn primary"> or 
+            <a href="@routes.courseModuleController.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+}

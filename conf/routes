@@ -2,38 +2,135 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
+# Default path index
 GET     /                           controllers.Application.index()
 
-# Students
-GET     /students                   controllers.StudentController.students()
-POST    /students                   controllers.StudentController.newStudent()
-POST    /students/:id/delete        controllers.StudentController.deleteStudent(id: Long)
 
-# Modules
-GET     /modules                    controllers.ModuleController.modules()
-POST    /modules                    controllers.ModuleController.newModule()
-POST    /modules/:id/delete         controllers.ModuleController.deleteModule(id: Long)
+##########
+#STUDENTS#
+##########
+# Student list (look at the default values for pagination parameters)
+GET     /students                  controllers.studentController.list(p:Int ?= 0, s ?= "surname", o ?= "asc", f ?= "")
 
-# Staff
-GET     /staff                      controllers.StaffController.staff()
-POST    /staff                      controllers.StaffController.newStaff()
-POST    /staff/:id/delete           controllers.StaffController.deleteStaff(id: Long)
+# Add student
+GET     /students/new              controllers.studentController.create()
+POST    /students                  controllers.studentController.save()
 
-# Courses
-GET     /course                     controllers.CourseController.courses()
-POST    /course                     controllers.CourseController.newCourse()
-POST    /course:id/delete           controllers.CourseController.deleteCourse(id: Long)
+# Edit existing student
+GET     /students/:id              controllers.studentController.edit(id:Long)
+POST    /students/:id              controllers.studentController.update(id:Long)
 
-# Slots
-GET     /slot                       controllers.SlotController.slots()
-POST     /slot                      controllers.SlotController.newSlot()
-POST     /slot:id/delete            controllers.SlotController.deleteSlot(id: Long)
+# Delete a student
+POST    /students/:id/delete       controllers.studentController.delete(id:Long)
 
-# Attendances
-GET     /attendance                  controllers.AttendanceController.attendances()
-POST    /attendance                  controllers.AttendanceController.newAttendance()
-POST    /attendance:id/delete        controllers.AttendanceController.deleteAttendance(id: Long)
+
+#########
+#COURSES#
+#########
+# Student list (look at the default values for pagination parameters)
+GET     /courses                  controllers.courseController.list(p:Int ?= 0, s ?= "number", o ?= "asc", f ?= "")
+
+# Add course
+GET     /courses/new              controllers.courseController.create()
+POST    /courses                  controllers.courseController.save()
+
+# Edit existing course
+GET     /courses/:id              controllers.courseController.edit(id:Long)
+POST    /courses/:id              controllers.courseController.update(id:Long)
+
+# Delete a course
+POST    /courses/:id/delete       controllers.courseController.delete(id:Long)
+
+
+#######
+#STAFF#
+#######
+# Staff list (look at the default values for pagination parameters)
+GET     /staff                  controllers.staffController.list(p:Int ?= 0, s ?= "number", o ?= "asc", f ?= "")
+
+# Add staff
+GET     /staff/new              controllers.staffController.create()
+POST    /staff                  controllers.staffController.save()
+
+# Edit existing staff
+GET     /staff/:id              controllers.staffController.edit(id:Long)
+POST    /staff/:id              controllers.staffController.update(id:Long)
+
+# Delete a staff member
+POST    /staff/:id/delete       controllers.staffController.delete(id:Long)
+
+
+#########
+#MODULES#
+#########
+# Module list (look at the default values for pagination parameters)
+GET     /modules                  controllers.moduleController.list(p:Int ?= 0, s ?= "crn", o ?= "asc", f ?= "")
+
+# Add module
+GET     /modules/new              controllers.moduleController.create()
+POST    /modules                  controllers.moduleController.save()
+
+# Edit existing module
+GET     /modules/:id              controllers.moduleController.edit(id:Long)
+POST    /modules/:id              controllers.moduleController.update(id:Long)
+
+# Delete a module
+POST    /modules/:id/delete       controllers.moduleController.delete(id:Long)
+
+
+#######
+#SLOTS#
+#######
+# Slot list (look at the default values for pagination parameters)
+GET     /slots                  controllers.slotController.list(p:Int ?= 0, s ?= "number", o ?= "asc", f ?= "")
+
+# Add slot
+GET     /slots/new              controllers.slotController.create()
+POST    /slots                  controllers.slotController.save()
+
+# Edit existing slot
+GET     /slots/:id              controllers.slotController.edit(id:Long)
+POST    /slots/:id              controllers.slotController.update(id:Long)
+
+# Delete a slot
+POST    /slots/:id/delete       controllers.slotController.delete(id:Long)
+
+
+############
+#ATTENDANCE#
+############
+# Attendance list (look at the default values for pagination parameters)
+GET     /attendances                  controllers.attendanceController.list(p:Int ?= 0, s ?= "id", o ?= "asc", f ?= "")
+
+# Add module
+GET     /attendances/new              controllers.attendanceController.create()
+POST    /attendances                  controllers.attendanceController.save()
+
+# Edit existing attendance
+GET     /attendances/:id              controllers.attendanceController.edit(id:Long)
+POST    /attendances/:id              controllers.attendanceController.update(id:Long)
+
+# Delete an attendance
+POST    /attendances/:id/delete       controllers.attendanceController.delete(id:Long)
+
+###############
+#Course_Module#
+###############
+# courseModules list (look at the default values for pagination parameters)
+GET     /courseModules                  controllers.courseModuleController.list(p:Int ?= 0, s ?= "course_id", o ?= "asc", f ?= "")
+
+# Add courseModules
+GET     /courseModules/new              controllers.courseModuleController.create()
+POST    /courseModules                  controllers.courseModuleController.save()
+
+# Edit existing courseModules
+GET     /courseModules/:id              controllers.courseModuleController.edit(id:Long)
+POST    /courseModules/:id              controllers.courseModuleController.update(id:Long)
+
+# Delete an courseModules
+POST    /courseModules/:id/delete       controllers.courseModuleController.delete(id:Long)
+
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

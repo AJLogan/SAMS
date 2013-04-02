@@ -1,0 +1,45 @@
+@(id: Long, courseForm: Form[Course])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h1>Edit course</h1>
+    
+    @form(routes.courseController.update(id)) {
+        
+        <fieldset>
+        @inputText(courseForm("number"),
+            '_label -> "Course Code"
+        )
+        @inputText(courseForm("start_year"),
+            '_label -> "Start Year"
+        )
+        @inputText(courseForm("name"),
+            '_label -> "Course Title"
+        )
+        @inputText(courseForm("duration"),
+            '_label -> "Course Duration"
+        )
+        @select(courseForm("mode_study"), 
+              options = options(ModeStudy.list),
+              '_label -> "Mode of Study",
+              '_default -> "--- Pick a Mode of Study ---"
+              
+        )
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Save this course" class="btn primary"> or 
+            <a href="@routes.courseController.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+    @form(routes.courseController.delete(id), 'class -> "topRight") {
+        <input type="submit" value="Delete this course" class="btn danger">
+    }
+    
+}

@@ -1,0 +1,66 @@
+@(studentForm: Form[Student])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h1>Add a Student</h1>
+    
+    @form(routes.studentController.save()) {
+        
+        <fieldset>            
+
+        @inputText(studentForm("number"),
+            '_label -> "Student Number"
+        )
+        @select(studentForm("title"), 
+              options = options(Titles.list),
+              '_label -> "Title"
+        )
+        @inputText(studentForm("forename"),
+            '_label -> "Forename"
+        )
+        @inputText(studentForm("surname"),
+            '_label -> "Surname"
+        )
+        @inputText(studentForm("email"),
+            '_label -> "Email Address",
+            '_showConstraints -> false
+        )
+        @select(studentForm("gender"), 
+              options = options(Genders.list),
+              '_label -> "Gender"
+        )
+        @inputText(studentForm("address_line_1"),
+            '_label -> "Address Line 1"
+        )
+        @inputText(studentForm("address_line_2"),
+            '_label -> "Address Line 2"
+        )
+        @inputText(studentForm("address_line_3"),
+            '_label -> "Town"
+        )
+        @inputText(studentForm("postcode"),
+            '_label -> "Postcode"
+        )
+        @checkbox(studentForm("international"),
+            '_label -> "International Student"
+        )
+        @select(studentForm("course.id"), 
+                options(Course.options), 
+                '_label -> "Course", 
+                '_default -> "-- Choose a course --",
+                '_showConstraints -> false
+        )
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Create this student" class="btn primary"> or 
+            <a href="@routes.studentController.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+}

@@ -1,63 +1,103 @@
 package controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-import play.*;
-import models.*;
-import play.data.Form;
+import java.util.*;
+
 import play.mvc.*;
+import play.data.*;
+import static play.data.Form.*;
+import play.*;
 
 import views.html.*;
 
+import models.*;
+
 /**
- *
- * @author andrew
+ * Manage staff
  */
-public class StaffController extends Controller{
-    
-public static Result staff() {
-//    return TODO;
-//    TODO is a 501 Not Implemented response
-      return ok(
-              views.html.staffInfo.render(Staff.all(), addStaffForm)
-              );
-  }
-  
-  public static Result newStaff() {
-//    return TODO;
-  Form<Staff> filledForm = addStaffForm.bindFromRequest();
-  if(filledForm.hasErrors()) {
-      System.out.println(filledForm.errors().toString());
-      System.out.println("Errors Ahoy");
-    return badRequest(
-      views.html.staffInfo.render(Staff.all(), filledForm)
-    );
-  } else {
-    Staff.create(filledForm.get());
-    return redirect(routes.StaffController.staff());  
-  }
-  }
-  
-  public static Result deleteStaff(Long id) {
-//    return TODO;
-      Staff.delete(id);
-      return redirect(routes.StaffController.staff());
-  }
-  
-  //Get Lecturers for Drop Down
-  public static List<String> getLecturerNames() {
-//      List<Staff> lecturers = Staff.find.all();
-//      System.out.println(lecturers);
-//      return lecturers;      
-   
-        List<String> all = new ArrayList<String>();
-        List<Staff> lecturers = Staff.find.all();
+public class staffController extends Controller {
         
-        all.add(lecturers.get(0).toString());
-        return all;
+    /**
+     * Handle default path requests, redirect to computers list
+     */
+    public static Result index() {
+        return redirect(routes.staffController.list(0, "number", "asc", ""));
+    }
+    /**
+     * Display the paginated list of staff.
+     *
+     * @param page Current page number (starts from 0)
+     * @param sortBy Column to be sorted
+     * @param order Sort order (either asc or desc)
+     * @param filter Filter applied on staff names
+     */
+    public static Result list(int page, String sortBy, String order, String filter) {
+        return ok(
+            listStaff.render(
+                Staff.page(page, 10, sortBy, order, filter),
+                sortBy, order, filter
+            )
+        );
+    }
     
-  }
-  
-//  FORMS
-  static Form<Staff> addStaffForm = Form.form(Staff.class);
+    /**
+     * Display the 'edit form' of a existing Staff.
+     *
+     * @param id Id of the staff to edit
+     */
+    public static Result edit(Long id) {
+        Form<Staff> staffForm = form(Staff.class).fill(
+            Staff.find.byId(id)
+        );
+        return ok(
+            editStaffForm.render(id, staffForm)
+        );
+    }
+    
+    /**
+     * Handle the 'edit form' submission 
+     *
+     * @param id Id of the staff to edit
+     */
+    public static Result update(Long id) {
+        Form<Staff> staffForm = form(Staff.class).bindFromRequest();
+        if(staffForm.hasErrors()) {
+            return badRequest(editStaffForm.render(id, staffForm));
+        }
+        staffForm.get().update(id);
+        flash("success", "Staff " + staffForm.get().forename + " " + staffForm.get().surname + " has been updated");
+        return redirect(routes.staffController.list(0, "number", "asc", ""));
+    }
+    
+    /**
+     * Display the 'new staff form'.
+     */
+    public static Result create() {
+        Form<Staff> staffForm = form(Staff.class);
+        return ok(
+            createStaffForm.render(staffForm)
+        );
+    }
+    
+    /**
+     * Handle the 'new staff form' submission 
+     */
+    public static Result save() {
+        Form<Staff> staffForm = form(Staff.class).bindFromRequest();
+        if(staffForm.hasErrors()) {
+            return badRequest(createStaffForm.render(staffForm));
+        }
+        staffForm.get().save();
+        flash("success", "Staff " + staffForm.get().forename + " " + staffForm.get().surname + " has been created");
+        return redirect(routes.staffController.list(0, "number", "asc", ""));
+    }
+    
+    /**
+     * Handle staff deletion
+     */
+    public static Result delete(Long id) {
+        Staff.find.ref(id).delete();
+        flash("success", "Staff has been deleted");
+        return redirect(routes.staffController.list(0, "number", "asc", ""));
+    }
 }
+            

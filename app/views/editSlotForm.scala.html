@@ -1,0 +1,58 @@
+@(id: Long, slotForm: Form[Slot])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h1>Edit slot</h1>
+    
+    @form(routes.slotController.update(id)) {
+        
+        <fieldset>
+        @inputText(slotForm("number"),
+            '_label -> "Slot Number"
+        )
+        @inputText(slotForm("room"),
+            '_label -> "Room Number"
+        )
+        @inputText(slotForm("year"),
+            '_label -> "Academic Year"
+        )
+        @inputText(slotForm("semester"),
+            '_label -> "Semester"
+        )
+        @inputText(slotForm("week"),
+            '_label -> "Week"
+        )
+        @select(slotForm("day"), 
+              options = options(Days.list),
+              '_label -> "Day"
+        )
+        @inputText(slotForm("start_time"),
+            '_label -> "Start Time (24 Hour Format)"
+        )
+        @inputText(slotForm("duration"),
+            '_label -> "Slot Duration"
+        )
+        @select(slotForm("module.id"), 
+            options(Module.options), 
+            '_label -> "Course", 
+            '_default -> "-- Choose a module --",
+            '_showConstraints -> false
+        )
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Save this slot" class="btn primary"> or 
+            <a href="@routes.slotController.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+    @form(routes.slotController.delete(id), 'class -> "topRight") {
+        <input type="submit" value="Delete this slot" class="btn danger">
+    }
+    
+}

@@ -2,46 +2,77 @@ package models;
 
 import java.util.*;
 import javax.persistence.*;
-import play.Logger;
 
-import play.data.validation.Constraints.*;
 import play.db.ebean.*;
+import play.data.format.*;
+import play.data.validation.*;
 
-@Entity
-public class Slot extends Model{
+
+import com.avaje.ebean.*;
+
+
+/**
+ * Slot entity managed by Ebean
+ */
+@Entity 
+public class Slot extends Model {
+
+    @Id
+    public Long id;
     
-  @Id  
-  public Long id;
-  
-  public String slotId;
-  public String roomId;
-  public String year;
-  public int semester;
-  public int week;
-  public int day;
-  public int startTime;
-  public int duration;
-  
-  @ManyToOne
-  public Module module;
-  
-  public static Model.Finder<Long, Slot> find = new Model.Finder(
-          Long.class, Slot.class);
- 
-  public static List<Slot> all() {
-    return find.all();
-  }
-  
-  public static void create(Slot slot) {
-      //creates slotID with a concatination of other fields, for use when searching
-      //slot.slotId = slot.year + slot.semester + slot.week + slot.day + slot.startTime + slot.roomId + slot.duration;
-      //creates slotID with a concatination of other fields, for use when searching - split with |
-      slot.slotId = slot.year + "|"+ slot.semester +"|"+ slot.week + "|" + slot.day +"|" + slot.startTime +"|" + slot.roomId + "|" + slot.duration;
-      slot.save();
-  }
-  
-  public static void delete(Long id) {
-      find.ref(id).delete();
-  }
+    @Constraints.Required
+    public String number;
+    @Constraints.Required
+    public String room;
+    @Constraints.Required
+    @Constraints.MaxLength(4)
+    public String year;
+    @Constraints.Required
+    public int semester;
+    @Constraints.Required
+    public int week;    
+    @Constraints.Required
+    public int day;    
+    @Constraints.Required
+    @Constraints.MaxLength(4)
+    public String start_time;
+    @Constraints.Required
+    public int duration;
+
+    @ManyToOne
+    public Module module;
     
+    /**
+     * Generic query helper for entity Slot with id Long
+     */
+    public static Model.Finder<Long,Slot> find = new Model.Finder<Long,Slot>(Long.class, Slot.class);
+
+    public static Map<String,String> options() {
+        LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
+        for(Slot s: Slot.find.orderBy("number").findList()) {
+            options.put(s.id.toString(), s.number);
+        }
+        return options;
+    }
+
+
+    /**
+     * Return a page of slots
+     *
+     * @param page Page to display
+     * @param pageSize Number of slots per page
+     * @param sortBy Slot property used for sorting
+     * @param order Sort order (either or asc or desc)
+     * @param filter Filter applied on the name column
+     */
+    public static Page<Slot> page(int page, int pageSize, String sortBy, String order, String filter) {
+        return 
+            find.where()
+                .orderBy(sortBy + " " + order)
+                .findPagingList(pageSize)
+                .setFetchAhead(false)
+                .getPage(page);
+    }
+
 }
+

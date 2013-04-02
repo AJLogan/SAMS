@@ -15,5 +15,4 @@ public class Days {
         all.add("Sunday");
         return all;
     }
-    
 }

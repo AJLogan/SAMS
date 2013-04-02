@@ -1,0 +1,38 @@
+@(attendanceForm: Form[Attendance])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main {
+    
+    <h1>Add an attendance</h1>
+    
+    @form(routes.attendanceController.save()) {
+        
+        <fieldset>            
+        @select(attendanceForm("slot.id"), 
+            options(Slot.options), 
+            '_label -> "Slot", 
+            '_default -> "-- Choose a slot --",
+            '_showConstraints -> false
+        )
+        @select(attendanceForm("student.id"), 
+            options(Student.options), 
+            '_label -> "Student", 
+            '_default -> "-- Choose a student --",
+            '_showConstraints -> false
+        )
+        @checkbox(attendanceForm("attendance"),
+            '_label -> "Present?"
+        )
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Create this attendance" class="btn primary"> or 
+            <a href="@routes.attendanceController.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+}
