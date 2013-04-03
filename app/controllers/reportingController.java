@@ -32,11 +32,11 @@ public class reportingController extends Controller {
 public static Result numberOfStudentsOnModule(String crn) {
     String sql
         = "SELECT DISTINCT module.crn, module.code, module.name, count(*) as NumStudents"
-            + "FROM student"
-            + "JOIN course ON student.course_id = course.id"
-            + "JOIN course_module ON course.id = course_module.course_id"
-            + "JOIN module ON course_module.module_id = module.id"
-            + "where crn = " + crn;
+            + " FROM student"
+            + " JOIN course ON student.course_id = course.id"
+            + " JOIN course_module ON course.id = course_module.course_id"
+            + " JOIN module ON course_module.module_id = module.id"
+            + " where crn = " + crn;
 
 RawSql rawSql = 
  RawSqlBuilder
