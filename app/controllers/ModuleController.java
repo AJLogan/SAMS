@@ -17,7 +17,7 @@ import models.*;
 public class moduleController extends Controller {
         
     /**
-     * Handle default path requests, redirect to computers list
+     * Handle default path requests, redirect to module list
      */
     public static Result index() {
         return redirect(routes.moduleController.list(0, "module_crn", "asc", ""));
@@ -64,7 +64,7 @@ public class moduleController extends Controller {
             return badRequest(editModuleForm.render(id, moduleForm));
         }
         moduleForm.get().update(id);
-        flash("success", "Module " + moduleForm.get().code + " " + moduleForm.get().name + " has been updated");
+        flash("success", "Module " + moduleForm.get().code + " " + moduleForm.get().description + " has been updated");
         return redirect(routes.moduleController.list(0, "module_crn", "asc", ""));
     }
     
@@ -87,7 +87,7 @@ public class moduleController extends Controller {
             return badRequest(createModuleForm.render(moduleForm));
         }
         moduleForm.get().save();
-        flash("success", "Module " + moduleForm.get().code + " " + moduleForm.get().name + " has been created");
+        flash("success", "Module " + moduleForm.get().code + " " + moduleForm.get().description + " has been created");
         return redirect(routes.moduleController.list(0, "module_crn", "asc", ""));
     }
     

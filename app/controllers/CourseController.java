@@ -17,7 +17,7 @@ import models.*;
 public class courseController extends Controller {
         
     /**
-     * Handle default path requests, redirect to computers list
+     * Handle default path requests, redirect to course list
      */
     public static Result index() {
         return redirect(routes.courseController.list(0, "number", "asc", ""));
@@ -87,7 +87,7 @@ public class courseController extends Controller {
             return badRequest(createCourseForm.render(courseForm));
         }
         courseForm.get().save();
-        flash("success", "Course " + courseForm.get().name + " has been created");
+        flash("success", "Course " + courseForm.get().description + " has been created");
         return redirect(routes.courseController.list(0, "number", "asc", ""));
     }
     

@@ -11,7 +11,7 @@ import static play.test.Helpers.*;
  * @author Andrew Logan
  */
 
-public class ApplicationTest extends WithApplication {
+public class ModelsTest extends WithApplication{
     @Before
     public void setUp() {
         start(fakeApplication(inMemoryDatabase()));
@@ -26,7 +26,7 @@ public class ApplicationTest extends WithApplication {
       assertEquals("B00520366", student.number);
       assertEquals("Andrew", student.forename);
       assertEquals("Logan", student.surname);
-      assertEquals("logan-a4@email.ulster.ac.uk", student.email);
+      assertEquals("logan-a4@email.ulster.ac.uk", student.email); 
       assertEquals("Male", student.gender);
       assertEquals("15 Park Lane", student.address_line_1);
       assertEquals("Crossgar Road", student.address_line_2);
@@ -34,4 +34,5 @@ public class ApplicationTest extends WithApplication {
       assertEquals("BT24 7PR", student.postcode);
       assertEquals(false, student.international);
   }
+    
 }

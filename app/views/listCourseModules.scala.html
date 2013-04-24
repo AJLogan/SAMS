@@ -79,14 +79,14 @@
                             @if(courseModule.course == null) {
                                 <em>-</em>
                             } else {
-                            <a href="@routes.courseModuleController.edit(courseModule.id)">@courseModule.course.name</a>
+                            <a href="@routes.courseModuleController.edit(courseModule.id)">@courseModule.course.description</a>
                             }
                         </td>
                         <td>
                             @if(courseModule.module == null) {
                                 <em>-</em>
                             } else {
-                                @courseModule.module.crn - @courseModule.module.name
+                                @courseModule.module.crn - @courseModule.module.description
                             }
                         </td>
                     </tr>

@@ -17,7 +17,7 @@ import models.*;
 public class studentController extends Controller {
         
     /**
-     * Handle default path requests, redirect to computers list
+     * Handle default path requests, redirect to student list
      */
     public static Result index() {
         return redirect(routes.studentController.list(0, "number", "asc", ""));
@@ -99,5 +99,4 @@ public class studentController extends Controller {
         flash("success", "Student has been deleted");
         return redirect(routes.studentController.list(0, "number", "asc", ""));
     }
-}
-            
+}         

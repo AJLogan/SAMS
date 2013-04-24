@@ -17,7 +17,7 @@ import models.*;
 public class staffController extends Controller {
         
     /**
-     * Handle default path requests, redirect to computers list
+     * Handle default path requests, redirect to staff list
      */
     public static Result index() {
         return redirect(routes.staffController.list(0, "number", "asc", ""));

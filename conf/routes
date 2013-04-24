@@ -27,7 +27,7 @@ POST    /students/:id/delete       controllers.studentController.delete(id:Long)
 #########
 #COURSES#
 #########
-# Student list (look at the default values for pagination parameters)
+# Course list (look at the default values for pagination parameters)
 GET     /courses                  controllers.courseController.list(p:Int ?= 0, s ?= "number", o ?= "asc", f ?= "")
 
 # Add course

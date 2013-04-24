@@ -26,7 +26,7 @@ public class Course extends Model {
     @Constraints.MaxLength(4)
     public String start_year;
     @Constraints.Required
-    public String name;
+    public String description;
     @Constraints.Required
     public int duration;
     @Constraints.Required
@@ -39,8 +39,8 @@ public class Course extends Model {
 
     public static Map<String,String> options() {
         LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
-        for(Course c: Course.find.orderBy("name").findList()) {
-            options.put(c.id.toString(), c.name);
+        for(Course c: Course.find.orderBy("description").findList()) {
+            options.put(c.id.toString(), c.description);
         }
         return options;
     }
@@ -52,7 +52,7 @@ public class Course extends Model {
      * @param pageSize Number of courses per page
      * @param sortBy Course property used for sorting
      * @param order Sort order (either or asc or desc)
-     * @param filter Filter applied on the name column
+     * @param filter Filter applied on the description column
      */
     public static Page<Course> page(int page, int pageSize, String sortBy, String order, String filter) {
         return 

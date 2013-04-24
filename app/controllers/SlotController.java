@@ -17,7 +17,7 @@ import models.*;
 public class slotController extends Controller {
         
     /**
-     * Handle default path requests, redirect to computers list
+     * Handle default path requests, redirect to slot list
      */
     public static Result index() {
         return redirect(routes.slotController.list(0, "number", "asc", ""));

@@ -6,67 +6,29 @@
     <div class="jumbotron">
         <h1>Dashboard</h1>
         <p class="lead"></p>
+    </br>
         <a class="btn btn-success" href="/students">All Students</a>
+        List of the student table </br>
+    </br>
         <a class="btn btn-success" href="/staff">All Staff</a>
+        List of the staff table </br>
+    </br>
         <a class="btn btn-success" href="/modules">All Modules</a>
+        List of the modules table </br>
+    </br>
         <a class="btn btn-success" href="/courses">All Courses</a>
+        List of the courses table </br>
+    </br>
         <a class="btn btn-success" href="/slots">All Slots</a>
+        List of the slots table </br>
+    </br>
         <a class="btn btn-success" href="/attendances">All Attendance</a>
+        List of the attendance table </br>
+    </br>
         <a class="btn btn-success" href="/courseModules">Course Module Links</a>
+        List of the course module table </br>
+    </br>
+        <a class="btn btn-danger" href="/mobile">Mobile</a>
+        Mobile attendance URL </br>
       </div>
-
-    <h1>Stuff needs done here...</h1>
-
-    <script src="http://docs.sencha.com/ext-js/4-1/extjs/ext-all.js"></script>
-    <script>
-      var store = Ext.create('Ext.data.JsonStore', {
-        fields: ['name', 'data'],
-        data: [
-            { 'name': 'metric one',   'data': 10 },
-            { 'name': 'metric two',   'data':  7 },
-            { 'name': 'metric three', 'data':  5 },
-            { 'name': 'metric four',  'data':  2 },
-            { 'name': 'metric five',  'data': 27 }
-        ]
-    });
-
-    Ext.create('Ext.chart.Chart', {
-        renderTo: Ext.getBody(),
-        width: 500,
-        height: 350,
-        animate: true,
-        store: store,
-        theme: 'Base:gradients',
-        series: [{
-            type: 'pie',
-            angleField: 'data',
-            showInLegend: true,
-            tips: {
-                trackMouse: true,
-                width: 140,
-                height: 28,
-                renderer: function(storeItem, item) {
-                    // calculate and display percentage on hover
-                    var total = 0;
-                    store.each(function(rec) {
-                        total += rec.get('data');
-                    });
-                    this.setTitle(storeItem.get('name') + ': ' + Math.round(storeItem.get('data') / total * 100) + '%');
-                }
-            },
-            highlight: {
-                segment: {
-                    margin: 20
-                }
-            },
-            label: {
-                field: 'name',
-                display: 'rotate',
-                contrast: true,
-                font: '18px Arial'
-            }
-        }]
-    });
-  </script>
-
 }

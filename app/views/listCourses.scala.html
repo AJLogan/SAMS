@@ -69,7 +69,7 @@
                 <tr>
                     @header("number", "Course Number")
                     @header("start_year", "Start Year")
-                    @header("name", "Course Name")
+                    @header("description", "Course Description")
                     @header("duration", "Course Duration")
                     @header("mode_study", "Mode of Study")
                 </tr>
@@ -87,10 +87,10 @@
                             }
                         </td>
                         <td>
-                            @if(course.name == null) {
+                            @if(course.description == null) {
                                 <em>-</em>
                             } else {
-                                @course.name
+                                @course.description
                             }
                         </td>
                         <td>

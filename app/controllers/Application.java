@@ -12,7 +12,7 @@ import views.html.*;
 import models.*;
 
 /**
- * Manage a database of computers
+ * Manage the student attendance database
  */
 public class Application extends Controller {
     
@@ -21,8 +21,5 @@ public class Application extends Controller {
      */
     public static Result index() {
         return ok(index.render("Index"));
-//        return ok("Hello World");
-//        This is a redirect to the tasks list page
-//        return redirect(routes.StudentController.students());
     }
 }           

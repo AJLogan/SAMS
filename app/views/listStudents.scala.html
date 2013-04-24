@@ -80,7 +80,7 @@
                     @header("postcode", "Postcode")
                     
                     @header("international", "International Student?")
-                    @header("course.name", "Course")
+                    @header("course.description", "Course")
                 </tr>
             </thead>
             <tbody>
@@ -162,7 +162,7 @@
                             @if(student.course == null) {
                                 <em>-</em>
                             } else {
-                                @student.course.name
+                                @student.course.description
                             }
                         </td>
                     </tr>

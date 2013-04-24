@@ -9,13 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+
 /**
  *
  * @author andrew
  */
 @Entity
 @Sql
-public class StudentModule {
+public class ClassList {
     
     @OneToOne
     Student student;
@@ -25,13 +26,5 @@ public class StudentModule {
     
     @Id
     Double NumStudents;
-
-    public Double getNumStudents() {
-        return NumStudents;
-    }
-
-    public void setNumStudents(Double NumStudents) {
-        this.NumStudents = NumStudents;
-    }
     
 }

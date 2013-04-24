@@ -39,6 +39,8 @@ public class Slot extends Model {
     @Constraints.Required
     public int duration;
 
+    public String uptodate;  
+
     @ManyToOne
     public Module module;
     
